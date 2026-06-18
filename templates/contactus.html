@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form method="post" action="/contactUs" >
+        {% csrf_token %}
+
+        Name : <input type="text" name="name"/>
+
+        Email : <input type="email" name="email"/>
+
+        Contact : <input type="text" name="contact"/>
+        <input type="submit" value="send"/>
+    </form>
+
+    {{ msg }}
+</body>
+</html>

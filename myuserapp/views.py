@@ -78,3 +78,18 @@ def dashboard(request):
 def logout(request):
     del request.session['myemail']
     return redirect(loginpage)
+
+def contactUs(request):
+    Name = request.POST.get("name")
+    Email = request.POST.get("email")
+    Contact = request.POST.get("contact")
+
+    send_mail(
+        "New Contact Form Submission",
+        f"Name : {Name}\nEmail : {Email}\nContact : {Contact}",
+        settings.EMAIL_HOST_USER,
+        [settings.EMAIL_HOST_USER],
+        fail_silently=False
+    )
+
+    return render(request, "contactus.html", {"msg": "Details sent successfully!"})
