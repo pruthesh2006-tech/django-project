@@ -15,6 +15,7 @@ urlpatterns = [
     path('login', views.loginpage),
     path('loginprocess',views.loginprocess),
     path('dashboard', views.dashboard),
-    path('logout',views.logout)
+    path('logout',views.logout),
+    path('maildemo',views.mailsenddemo)
 ]   
 
