@@ -17,6 +17,9 @@ urlpatterns = [
     path('dashboard', views.dashboard),
     path('logout',views.logout),
     path('maildemo',views.mailsenddemo),
-    path('contactUs', views.contactUs),
+    path('contactMe', views.contactMe),
+    path('contactus', views.contactus),
+    path('addStudent', views.addstudentform),
+    path('add-student-process', views.addstudentformprocess)
 ]   
 

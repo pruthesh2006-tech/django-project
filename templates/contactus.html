@@ -6,8 +6,9 @@
     <title>Contact Us</title>
 </head>
 <body>
+    {% include 'menu.html' %}
     <h1>Contact Us</h1>
-    <form method="post" action="/contactUs" >
+    <form method="post" action="/contactMe" >
         {% csrf_token %}
 
         Name : <input type="text" name="name"/>
@@ -15,9 +16,7 @@
         Email : <input type="email" name="email"/>
 
         Contact : <input type="text" name="contact"/>
-        <input type="submit" value="send"/>
+        <input type="submit"/>
     </form>
-
-    {{ msg }}
 </body>
 </html>

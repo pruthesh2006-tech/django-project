@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse 
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Student
 
 # Create your views here.
 
@@ -79,17 +80,43 @@ def logout(request):
     del request.session['myemail']
     return redirect(loginpage)
 
-def contactUs(request):
+def contactus(request):
+    return render(request,'contactus.html')
+
+def contactMe(request):
     Name = request.POST.get("name")
     Email = request.POST.get("email")
     Contact = request.POST.get("contact")
 
-    send_mail(
-        "New Contact Form Submission",
-        f"Name : {Name}\nEmail : {Email}\nContact : {Contact}",
-        settings.EMAIL_HOST_USER,
-        [settings.EMAIL_HOST_USER],
-        fail_silently=False
-    )
+    mymsg = " Hello has Contact you",Name," Email is ",Email," Contact is ",Contact
 
-    return render(request, "contactus.html", {"msg": "Details sent successfully!"})
+    subject = 'Contact us from website'
+    email_from = settings.EMAIL_HOST_USER
+
+    message = mymsg
+    recipient_list = ['p@gmail.com',]
+    send_mail( subject, message, email_from, recipient_list )
+    return HttpResponse("Thank you for Contacting us.")
+
+def addstudentform(request):
+    return render(request,"add-student.html")
+
+def addstudentformprocess(request):
+    txt1 = request.POST['txt1']
+    txt2 = request.POST['txt2']
+    txt3 = request.POST['txt3']
+    txt4 = request.POST['txt4']
+    # Student.objects.create(sname=txt1,smobile=txt2,semail=txt3,saddress=txt4)
+    # return HttpResponse("Thank you for signup")
+
+    send_mail(
+            "New Student Details",
+            f"sname : {txt1}\n"
+            f"smobile : {txt2}\n"
+            f"semail : {txt3}\n"
+            f"saddress : {txt4}",
+            settings.EMAIL_HOST_USER,
+            [settings.EMAIL_HOST_USER],
+            fail_silently=False
+    )
+    return render(request,"add-student.html")
