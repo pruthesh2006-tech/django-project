@@ -20,6 +20,9 @@ urlpatterns = [
     path('contactMe', views.contactMe),
     path('contactus', views.contactus),
     path('addStudent', views.addstudentform),
-    path('add-student-process', views.addstudentformprocess)
+    path('add-student-process', views.addstudentformprocess),
+    
+    path('display-student', views.displayStudent),
+    path('delete-student/<int:id>', views.deleteStudent),
 ]   
 

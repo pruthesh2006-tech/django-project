@@ -106,17 +106,25 @@ def addstudentformprocess(request):
     txt2 = request.POST['txt2']
     txt3 = request.POST['txt3']
     txt4 = request.POST['txt4']
-    # Student.objects.create(sname=txt1,smobile=txt2,semail=txt3,saddress=txt4)
-    # return HttpResponse("Thank you for signup")
+    Student.objects.create(sname=txt1,smobile=txt2,semail=txt3,saddress=txt4)
+    return redirect(displayStudent)
 
-    send_mail(
-            "New Student Details",
-            f"sname : {txt1}\n"
-            f"smobile : {txt2}\n"
-            f"semail : {txt3}\n"
-            f"saddress : {txt4}",
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=False
-    )
-    return render(request,"add-student.html")
+    # send_mail(
+    #         "New Student Details",
+    #         f"sname : {txt1}\n"
+    #         f"smobile : {txt2}\n"
+    #         f"semail : {txt3}\n"
+    #         f"saddress : {txt4}",
+    #         settings.EMAIL_HOST_USER,
+    #         [settings.EMAIL_HOST_USER],
+    #         fail_silently=False
+    # )
+    # return render(request,"add-student.html")
+
+def displayStudent(request):
+    mystudentlist = Student.objects.all()
+    return render(request,'display-student.html',{'mydata':mystudentlist})
+
+def deleteStudent(request,id):
+    Student.objects.get(id=id).delete()
+    return redirect(displayStudent)
